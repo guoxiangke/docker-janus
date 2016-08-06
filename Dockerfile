@@ -38,6 +38,9 @@ ADD scripts/janus.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/janus.sh
 RUN touch /var/log/meetecho
 
+COPY run.sh /run.sh
+RUN chmod a+rx /run.sh
+
 EXPOSE 10000-11000
 EXPOSE 8088
 EXPOSE 8089
@@ -45,4 +48,4 @@ EXPOSE 8000
 EXPOSE 7088
 EXPOSE 7089
 
-CMD ["run.sh"]
+ENTRYPOINT ["/run.sh"]

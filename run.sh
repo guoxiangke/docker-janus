@@ -10,6 +10,11 @@ CFG_HTTPS='/root/janus/etc/janus/janus.transport.http.cfg'
 sed 's/https = no/https = yes/1' -i $CFG_HTTPS
 sed 's/;secure_port = 8889/secure_port = 8089/1' -i $CFG_HTTPS
 
+# Start demo server
+npm install http-server -g
+ln -s /usr/bin/nodejs /usr/bin/node
+http-server /root/janus/share/janus/demos/ &
+
 /root/janus/bin/janus --stun-server=stun.l.google.com:19302 -L /var/log/meetecho --rtp-port-range=10000-11000
 tail -f /var/log/meetecho
 

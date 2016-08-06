@@ -10,6 +10,7 @@ RUN sed -i 's/archive.ubuntu.com/mirror.aarnet.edu.au\/pub\/ubuntu\/archive/g' /
 # install baseline package dependencies
 RUN apt-get -y update && apt-get install -y libmicrohttpd-dev \
   libjansson-dev \
+  libcurl4-openssl-dev \
   libnice-dev \
   libssl-dev \
   libsrtp-dev \
@@ -35,5 +36,13 @@ RUN $SCRIPTS_PATH/bootstrap.sh
 ENV JANUS_RELEASE="v0.1.2"
 ADD scripts/janus.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/janus.sh
+RUN touch /var/log/meetecho
 
-CMD ["/root/janus/bin/janus"]
+EXPOSE 10000-11000
+EXPOSE 8088
+EXPOSE 8089
+EXPOSE 8000
+EXPOSE 7088
+EXPOSE 7089
+
+CMD ["run.sh"]

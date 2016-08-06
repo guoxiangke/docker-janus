@@ -38,6 +38,9 @@ ADD scripts/janus.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/janus.sh
 RUN touch /var/log/meetecho
 
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/*
+
 COPY run.sh /run.sh
 RUN chmod a+rx /run.sh
 

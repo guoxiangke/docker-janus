@@ -28,7 +28,9 @@ RUN apt-get -y update && apt-get install -y libmicrohttpd-dev \
   subversion \
   git \
   cmake \
-  wget
+  wget \
+  npm \
+  nano
 
 ADD scripts/bootstrap.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/bootstrap.sh
@@ -36,6 +38,7 @@ RUN $SCRIPTS_PATH/bootstrap.sh
 ENV JANUS_RELEASE="v0.1.2"
 ADD scripts/janus.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/janus.sh
+
 RUN touch /var/log/meetecho
 
 RUN apt-get clean
@@ -44,7 +47,7 @@ RUN rm -rf /var/lib/apt/lists/*
 COPY run.sh /run.sh
 RUN chmod a+rx /run.sh
 
-EXPOSE 10000-11000
+EXPOSE 10000-11000/udp
 EXPOSE 8088
 EXPOSE 8089
 EXPOSE 8000

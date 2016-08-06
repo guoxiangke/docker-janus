@@ -13,7 +13,7 @@ sed 's/;secure_port = 8889/secure_port = 8089/1' -i $CFG_HTTPS
 # Start demo server
 npm install http-server -g
 ln -s /usr/bin/nodejs /usr/bin/node
-http-server --ssl /root/janus/share/janus/demos/ --key /usr/share/doc/libssl-doc/demos/sign/key.pem --cert /usr/share/doc/libssl-doc/demos/sign/cert.pem &
+http-server /root/janus/share/janus/demos/ --key /usr/share/doc/libssl-doc/demos/sign/key.pem --cert /usr/share/doc/libssl-doc/demos/sign/cert.pem -d false -p 8080 -c-1 --ssl &
 
 /root/janus/bin/janus --stun-server=stun.l.google.com:19302 -L /var/log/meetecho --rtp-port-range=10000-11000
 tail -f /var/log/meetecho

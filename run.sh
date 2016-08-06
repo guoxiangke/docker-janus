@@ -10,11 +10,19 @@ CFG_HTTPS='/root/janus/etc/janus/janus.transport.http.cfg'
 sed 's/https = no/https = yes/1' -i $CFG_HTTPS
 sed 's/;secure_port = 8889/secure_port = 8089/1' -i $CFG_HTTPS
 
+# Generate Certs
+openssl req -x509 -newkey rsa:4086 \
+  -subj "/C=XX/ST=XXXX/L=XXXX/O=XXXX/CN=localhost" \
+  -keyout "/usr/share/key.pem" \
+  -out "/usr/share/cert.pem" \
+  -days 3650 -nodes -sha256
+
 # Start demo server
 npm install http-server -g
 ln -s /usr/bin/nodejs /usr/bin/node
-http-server /root/janus/share/janus/demos/ --key /usr/share/doc/libssl-doc/demos/sign/key.pem --cert /usr/share/doc/libssl-doc/demos/sign/cert.pem -d false -p 8080 -c-1 --ssl &
+http-server /root/janus/share/janus/demos/ --key /usr/share/key.pem --cert /usr/share/cert.pem -d false -p 8080 -c-1 --ssl &
 
+# Start Janus Gateway
 /root/janus/bin/janus --stun-server=stun.l.google.com:19302 -L /var/log/meetecho --rtp-port-range=10000-11000
 tail -f /var/log/meetecho
 

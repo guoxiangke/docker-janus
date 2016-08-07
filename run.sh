@@ -3,7 +3,7 @@
 # Patch Config to enable Event Handler
 CFG_EVENT='/root/janus/etc/janus/janus.eventhandler.sampleevh.cfg'
 sed 's/enabled = no/enabled = yes/1' -i $CFG_EVENT
-echo 'backend = http://127.0.0.1:7777' >> $CFG_EVENT
+echo 'backend = http://localhost:7777' >> $CFG_EVENT
 CFG_JANUS='/root/janus/etc/janus/janus.cfg'
 sed 's/; broadcast = yes/broadcast = yes/1' -i $CFG_JANUS
 CFG_HTTPS='/root/janus/etc/janus/janus.transport.http.cfg'
@@ -21,6 +21,10 @@ openssl req -x509 -newkey rsa:4086 \
 npm install http-server -g
 ln -s /usr/bin/nodejs /usr/bin/node
 http-server /root/janus/share/janus/demos/ --key /usr/share/key.pem --cert /usr/share/cert.pem -d false -p 8080 -c-1 --ssl &
+
+# Start Evapi Demo
+npm install http -g
+nodejs /evapi.js >> /var/log/meetecho &
 
 # Start Janus Gateway
 /root/janus/bin/janus --stun-server=stun.l.google.com:19302 -L /var/log/meetecho --rtp-port-range=10000-10200

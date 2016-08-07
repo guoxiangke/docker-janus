@@ -23,6 +23,6 @@ ln -s /usr/bin/nodejs /usr/bin/node
 http-server /root/janus/share/janus/demos/ --key /usr/share/key.pem --cert /usr/share/cert.pem -d false -p 8080 -c-1 --ssl &
 
 # Start Janus Gateway
-/root/janus/bin/janus --stun-server=stun.l.google.com:19302 -L /var/log/meetecho --rtp-port-range=10000-11000
+/root/janus/bin/janus --stun-server=stun.l.google.com:19302 -L /var/log/meetecho --rtp-port-range=10000-10200
 tail -f /var/log/meetecho
 

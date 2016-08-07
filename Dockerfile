@@ -44,12 +44,15 @@ RUN touch /var/log/meetecho
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
+COPY evapi.js /evapi.js
+
 COPY run.sh /run.sh
 RUN chmod a+rx /run.sh
 
-EXPOSE 10000-11000/udp
+EXPOSE 10000-10200/udp
 EXPOSE 8088
 EXPOSE 8089
+EXPOSE 8889
 EXPOSE 8000
 EXPOSE 7088
 EXPOSE 7089

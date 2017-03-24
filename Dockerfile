@@ -35,7 +35,7 @@ RUN apt-get -y update && apt-get install -y libmicrohttpd-dev \
 ADD scripts/bootstrap.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/bootstrap.sh
 
-ENV JANUS_RELEASE="v0.1.2"
+ENV JANUS_RELEASE="v0.2.2"
 ADD scripts/janus.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/janus.sh
 

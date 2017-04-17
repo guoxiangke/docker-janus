@@ -14,19 +14,11 @@ docker run -tid --name janus \
 qxip/docker-janus
 ```
 
+#### Usage
+Before using, you __MUST__ accept the server _self-signed_ certificate:
+* browse to server: ```:8080```
+* browse to demos: ```:8089```
+
+
 #### Docker Compose
-You can manage this image with Compose by specifying a service like:
-```
-janus:
-		container_name: janus
-		image: qxip/docker-janus
-		ports:
-				- "7889:7889"
-				- "7089:7089"
-				- "8089:8089"
-				- "7088:7088"
-				- "8088:8088"
-				- "8000:8000"
-				- "8080:8080"
-				- "10000-10200/udp:10000-10200/udp"
-				```
+See ```docker-compose.yml```

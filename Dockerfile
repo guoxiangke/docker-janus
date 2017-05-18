@@ -45,7 +45,7 @@ RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN cd /opt && git clone https://github.com/sipcapture/paStash && cd paStash && npm install \
-    && ln -s ./bin/pastash /usr/bin/pastash
+    && chmod a+rx /opt/paStash/bin/pastash && ln -s /opt/paStash/bin/pastash /usr/local/bin/pastash
   
 COPY ricetta.json /ricetta.json
 

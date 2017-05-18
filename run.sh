@@ -22,9 +22,8 @@ npm install http-server -g
 ln -s /usr/bin/nodejs /usr/bin/node
 http-server /root/janus/share/janus/demos/ --key /usr/share/key.pem --cert /usr/share/cert.pem -d false -p 8080 -c-1 --ssl &
 
-# Start Evapi Demo
-npm install http -g
-nodejs /evapi.js >> /var/log/meetecho &
+# Start Evapi Pastash
+pastash --config_file=/ricetta.json >> /var/log/meetecho &
 
 # Start Janus Gateway in forever mode
 CMD="/root/janus/bin/janus --stun-server=stun.l.google.com:19302 -L /var/log/meetecho --rtp-port-range=10000-10200"

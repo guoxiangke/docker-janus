@@ -44,7 +44,10 @@ RUN touch /var/log/meetecho
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
 
-COPY evapi.js /evapi.js
+RUN cd /opt && git clone https://github.com/sipcapture/paStash && cd pastash && npm install \
+    && ln -s /usr/bin/pastash ./bin/pastash
+  
+COPY ricetta.json /ricetta.json
 
 COPY run.sh /run.sh
 RUN chmod a+rx /run.sh

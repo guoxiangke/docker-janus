@@ -30,7 +30,8 @@ RUN apt-get -y update && apt-get install -y libmicrohttpd-dev \
   cmake \
   wget \
   npm \
-  nano
+  nano \
+  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD scripts/bootstrap.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/bootstrap.sh
@@ -40,9 +41,6 @@ ADD scripts/janus.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/janus.sh
 
 RUN touch /var/log/meetecho
-
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/*
 
 RUN cd /opt && git clone https://github.com/sipcapture/paStash && cd paStash && npm install \
     && chmod a+rx /opt/paStash/bin/pastash && ln -s /opt/paStash/bin/pastash /usr/local/bin/pastash

@@ -27,7 +27,7 @@ npm install http -g
 nodejs /evapi.js >> /var/log/meetecho &
 
 # Start Janus Gateway in forever mode
-CMD="/root/janus/bin/janus --stun-server=stun.l.google.com:19302 -L /var/log/meetecho --rtp-port-range=10000-10200"
+CMD="/root/janus/bin/janus --stun-server=meetme.yongbuzhixi.com:3478 -L /var/log/meetecho --rtp-port-range=10000-10200"
 until $CMD
 do
     :

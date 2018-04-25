@@ -1,5 +1,20 @@
+# janus-cert:
+#   restart: always
+#   image: apache
+#   container_name: a-containers-manager
+#   volumes_from:
+#       - janus
+#   volumes:
+#     - "/root/janus/:/var/www/html"
+#   environment:
+#     - VIRTUAL_HOST=janus.yongbuzhixi.com
+#     - LETSENCRYPT_HOST=janus.yongbuzhixi.com
+#     - LETSENCRYPT_EMAIL=dale@yongbuzhixi.com
 janus:
-  image: qxip/docker-janus
+  build: .
+  volumes:
+    # - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    - "~/docker-nginx-https/config/nginx/certs:/root/janus/certs/"
   ports:
   - "7889:7889"
   - "7089:7089"
